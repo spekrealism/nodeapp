@@ -1,16 +1,14 @@
-version: '3'
-
 services:
   app:
     build: .
     ports:
-      - "${APP_PORT:-3000}:3000"
+      - "${APP_PORT:-3042}:${PORT:-3042}"
     depends_on:
       - postgres
     environment:
-      - PORT=${APP_PORT:-3001}
-      - DB_HOST=${DB_HOST:-postgres}
-      - DB_PORT=${DB_PORT:-5432}
+      - PORT=${PORT:-3042}
+      - DB_HOST=postgres
+      - DB_PORT=5432
       - DB_NAME=${DB_NAME:-balance_db}
       - DB_USER=${DB_USER:-postgres}
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
@@ -20,7 +18,7 @@ services:
   postgres:
     image: postgres:14-alpine
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5437}:5432"
     environment:
       - POSTGRES_DB=${DB_NAME:-balance_db}
       - POSTGRES_USER=${DB_USER:-postgres}
